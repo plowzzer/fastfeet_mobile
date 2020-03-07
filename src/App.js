@@ -1,25 +1,12 @@
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+// import React from 'react';
+// // import { useSelector } from 'react-redux';
 
-// import { Container } from './styles';
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#f5fcff',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-});
+// import createRouter from './routes';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.welcome}>Welcome to react native</Text>
-    </View>
-  );
-}
+// export default function App() {
+//   // const signed = useSelector(state => state.auth.signed)
+
+//   const Routes = createRouter();
+
+//   return <Routes />;
+// }
