@@ -19,6 +19,7 @@ export function* singIn({ payload }) {
         name: response.data.name,
         email: response.data.email,
         avatar: response.data.avatar,
+        createdAt: response.data.createdAt,
       })
     );
 

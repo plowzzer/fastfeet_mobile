@@ -1,12 +1,58 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { format } from 'date-fns';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { Text } from 'react-native';
+import { signOut } from '~/store/modules/auth/actions';
 
-// import { Container } from './styles';
+import Avatar from '~/components/Avatar';
+
+import {
+  Container,
+  AvatarProfile,
+  ProfileDetail,
+  DetailName,
+  DetailInfo,
+  LogoutButton,
+} from './styles';
 
 export default function Profile() {
-  return <Text>TESTE2</Text>;
+  const dispatch = useDispatch();
+  const profile = useSelector(state => state.user.profile);
+  const auth = useSelector(state => state.auth);
+
+  function handleLogout() {
+    dispatch(signOut());
+  }
+
+  return (
+    <Container>
+      <AvatarProfile>
+        {profile.avatar ? (
+          <Avatar size={140} source={{ url: profile.avatar.url }} />
+        ) : (
+          <Text>{profile.name}</Text>
+        )}
+      </AvatarProfile>
+      <ProfileDetail>
+        <DetailName>Nome Completo</DetailName>
+        <DetailInfo>{profile.name}</DetailInfo>
+      </ProfileDetail>
+      <ProfileDetail>
+        <DetailName>Email</DetailName>
+        <DetailInfo>{profile.email}</DetailInfo>
+      </ProfileDetail>
+      <ProfileDetail>
+        <DetailName>Data de cadastro</DetailName>
+        <DetailInfo>
+          {profile.createdAt
+            ? format(new Date(profile.createdAt), 'dd/MM/yyyy')
+            : '-'}
+        </DetailInfo>
+      </ProfileDetail>
+      <LogoutButton onPress={handleLogout}>Logout</LogoutButton>
+    </Container>
+  );
 }
 
 Profile.navigationOptions = {
