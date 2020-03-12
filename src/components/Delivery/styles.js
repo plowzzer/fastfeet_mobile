@@ -11,7 +11,7 @@ export const Container = styled.View`
 export const TitleContainer = styled.View`
   flex-direction: row;
   align-items: center;
-  padding: 0 15px;
+  padding: 15px;
 `;
 
 export const Title = styled.Text`

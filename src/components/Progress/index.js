@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View } from 'react-native';
 
-import { Container, ProgressContainer, StatusDot } from './styles';
+import {
+  Container,
+  ProgressContainer,
+  StatusDot,
+  ProgressName,
+  StatusName,
+} from './styles';
 
-export default function Progress({ data }) {
-  const [status, setStatus] = useState('AGUARDANDO');
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
-
+export default function Progress({ status }) {
   return (
     <Container>
       <ProgressContainer>
@@ -17,6 +16,11 @@ export default function Progress({ data }) {
         <StatusDot active={status === 'ENTREGUE' || status === 'RETIRADA'} />
         <StatusDot active={status === 'ENTREGUE'} />
       </ProgressContainer>
+      <ProgressName>
+        <StatusName>Aguardando Retirada</StatusName>
+        <StatusName>Retirada</StatusName>
+        <StatusName>Entregue</StatusName>
+      </ProgressName>
     </Container>
   );
 }

@@ -14,7 +14,6 @@ export default function Signin({ navigation }) {
   const loading = useSelector(state => state.auth.loading);
 
   function handleSubmit() {
-    console.log(id);
     dispatch(signInRequest(id));
   }
 

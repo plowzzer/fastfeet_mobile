@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { signOut } from '~/store/modules/auth/actions';
+
 import api from '~/services/api';
 import Avatar from '~/components/Avatar';
 import Delivery from '~/components/Delivery';
-import { Text } from 'react-native';
 
 import {
   Container,
@@ -31,7 +32,7 @@ export default function Dashboard() {
   const auth = useSelector(state => state.auth);
 
   function handleLogout() {
-    console.log('sair');
+    dispatch(signOut());
   }
 
   function handleSelect(typeToChange) {
@@ -42,11 +43,18 @@ export default function Dashboard() {
     async function loadDeliveries() {
       const response =
         type === 'PENDENTES'
-          ? await api.get(`/deliveryman/${auth.id}`)
-          : await api.get(`/deliveryman/${auth.id}/deliveries`);
+          ? await api.get(`/deliveryman/${auth.id}/deliveries`, {
+              params: {
+                status: 'PENDING',
+              },
+            })
+          : await api.get(`/deliveryman/${auth.id}/deliveries`, {
+              params: {
+                status: 'DONE',
+              },
+            });
 
       setDeliveries(response.data);
-      console.log(response.data);
     }
 
     loadDeliveries();
@@ -102,3 +110,10 @@ export default function Dashboard() {
     </Container>
   );
 }
+
+Dashboard.navigationOptions = {
+  tabBarLabel: 'Entregas',
+  tabBarIcon: ({ tintColor }) => (
+    <Icon name="reorder" color={tintColor} size={24} />
+  ),
+};
