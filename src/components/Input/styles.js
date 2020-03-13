@@ -1,11 +1,11 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  padding: 0 15px;
+  padding: 15px 15px;
   height: 45px;
   background: #ffffff;
   flex-direction: row;
-  align-items: center;
+  align-items: ${props => (props.multiline ? 'flex-start' : 'center')};
   border-radius: 4px;
 `;
 

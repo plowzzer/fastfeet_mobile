@@ -1,21 +1,20 @@
 import styled from 'styled-components/native';
 
-export const Container = styled.SafeAreaView`
+export const Container = styled.View`
   flex: 1;
-  padding: 0 30px;
   background: #fff;
 `;
 
 export const Background = styled.View`
   background-color: #7d40e7;
-  height: 100px;
+  height: 160px;
 `;
 
 export const CardContainer = styled.View`
   background-color: #fff;
   border-radius: 4px;
   padding: 15px;
-  margin: -25px 30px 40px;
+  margin: -55px 30px 40px;
   box-shadow: 0 0 3px #0000001a;
 `;
 
