@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  padding: 15px 15px;
+  padding: ${props => (props.multiline ? '15px' : '0px 15px')};
   height: 45px;
   background: #ffffff;
   flex-direction: row;
