@@ -35,10 +35,12 @@ target 'mobile' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
 
-  target 'mobileTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
+  pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
+
+  # target 'mobileTests' do
+  #   inherit! :search_paths
+  #   # Pods for testing
+  # end
 
   use_native_modules!
 end

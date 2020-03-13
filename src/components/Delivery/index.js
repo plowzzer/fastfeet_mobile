@@ -12,10 +12,11 @@ import {
   Detail,
   Subtitle,
   DetailData,
-  LinkStyled,
+  DeliveryLink,
+  DeliveryLinkText,
 } from './styles';
 
-export default function Delivery({ data }) {
+export default function Delivery({ data, navigation }) {
   return (
     <Container>
       <TitleContainer>
@@ -37,7 +38,13 @@ export default function Delivery({ data }) {
           <DetailData>{data.recipient.city}</DetailData>
         </Detail>
         <Detail>
-          <LinkStyled>Ver detalhes</LinkStyled>
+          <DeliveryLink
+            onPress={() => {
+              navigation.navigate('SelectedDelivery', { data });
+            }}
+          >
+            <DeliveryLinkText>Ver detalhes</DeliveryLinkText>
+          </DeliveryLink>
         </Detail>
       </DetailsContainer>
     </Container>

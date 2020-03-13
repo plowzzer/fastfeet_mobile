@@ -23,7 +23,7 @@ import {
   Deliveries,
 } from './styles';
 
-export default function Dashboard() {
+export default function Dashboard({ navigation }) {
   const [deliveries, setDeliveries] = useState([]);
   const [type, setType] = useState('PENDENTES');
 
@@ -105,7 +105,9 @@ export default function Dashboard() {
       <Deliveries
         data={deliveries}
         keyExtractor={item => String(item.id)}
-        renderItem={({ item }) => <Delivery data={item} />}
+        renderItem={({ item }) => (
+          <Delivery data={item} navigation={navigation} />
+        )}
       />
     </Container>
   );

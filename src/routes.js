@@ -1,10 +1,15 @@
 import React from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import SignIn from '~/pages/Signin';
 import Dashboard from '~/pages/Dashboard';
 import Profile from '~/pages/Profile';
+import SelectedDelivery from '~/pages/Details/SelectedDelivery';
+import InformProblem from '~/pages/Details/InformProblem';
 
 export default (signedIn = false) =>
   createAppContainer(
@@ -15,7 +20,31 @@ export default (signedIn = false) =>
         }),
         App: createBottomTabNavigator(
           {
-            Dashboard,
+            Delivery: {
+              screen: createStackNavigator(
+                {
+                  Dashboard,
+                  SelectedDelivery,
+                  InformProblem,
+                },
+                {
+                  defaultNavigationOptions: {
+                    headerTransparent: true,
+                    headerTintColor: '#fff',
+                    headerLeftContainerStyle: {
+                      marginLeft: 20,
+                    },
+                  },
+                }
+              ),
+              navigationOptions: {
+                tabBarVisible: true,
+                tabBarLabel: 'Entregas',
+                tabBarIcon: ({ tintColor }) => (
+                  <Icon name="reorder" size={20} color={tintColor} />
+                ),
+              },
+            },
             Profile,
           },
           {

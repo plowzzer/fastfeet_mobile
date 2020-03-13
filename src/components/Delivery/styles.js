@@ -46,7 +46,9 @@ export const DetailData = styled.Text`
   font-weight: bold;
 `;
 
-export const LinkStyled = styled.Text`
+export const DeliveryLink = styled.TouchableOpacity``;
+
+export const DeliveryLinkText = styled.Text`
   color: #7d40e7;
   font-size: 12px;
   font-weight: bold;
