@@ -10,6 +10,8 @@ import Dashboard from '~/pages/Dashboard';
 import Profile from '~/pages/Profile';
 import SelectedDelivery from '~/pages/Details/SelectedDelivery';
 import InformProblem from '~/pages/Details/InformProblem';
+import CheckProblems from '~/pages/Details/CheckProblems';
+import ConfirmDelivery from '~/pages/Details/ConfirmDelivery';
 
 export default (signedIn = false) =>
   createAppContainer(
@@ -26,6 +28,8 @@ export default (signedIn = false) =>
                   Dashboard,
                   SelectedDelivery,
                   InformProblem,
+                  CheckProblems,
+                  ConfirmDelivery,
                 },
                 {
                   defaultNavigationOptions: {

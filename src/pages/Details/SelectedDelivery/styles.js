@@ -10,11 +10,15 @@ export const Background = styled.View`
   height: 160px;
 `;
 
+export const EffectContainer = styled.View`
+  margin-top: -55px;
+`;
+
 export const CardContainer = styled.View`
   background-color: #fff;
   border-radius: 4px;
   padding: 15px;
-  margin: -55px 30px 40px;
+  margin: 0px 30px 15px;
   box-shadow: 0 0 3px #0000001a;
 `;
 
@@ -54,7 +58,7 @@ export const RowDetail = styled.View`
 `;
 
 export const OptionsContainer = styled.View`
-  margin: -25px 30px;
+  margin: 0px 30px;
   background-color: #f8f9fd;
   border-radius: 4px;
   box-shadow: 0 0 3px #0000001a;
@@ -65,7 +69,8 @@ export const Option = styled.TouchableOpacity`
   flex: 1;
   justify-content: center;
   align-items: center;
-  margin: 20px auto;
+  padding: 15px;
+  border: 1px solid #0000001a;
 `;
 
 export const OptionText = styled.Text`

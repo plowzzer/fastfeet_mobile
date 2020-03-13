@@ -16,10 +16,14 @@ export const Background = styled.View`
   height: 160px;
 `;
 
+export const EffectContainer = styled.View`
+  margin-top: -55px;
+`;
+
 export const Form = styled.View`
   align-self: stretch;
   margin-top: 50px;
-  margin: -55px 30px 0;
+  margin: 0px 30px;
 `;
 
 export const FormInput = styled(Input)`

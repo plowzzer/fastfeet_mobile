@@ -6,6 +6,7 @@ import api from '~/services/api';
 
 import {
   Container,
+  EffectContainer,
   Background,
   Form,
   FormInput,
@@ -40,20 +41,22 @@ export default function InformProblem({ navigation }) {
   return (
     <Container>
       <Background />
-      <Form>
-        <FormInput
-          placeholder="Inclua aqui o problema que ocorreu na entrega."
-          autoCorrect={false}
-          multiline
-          value={problem}
-          onChangeText={setProblem}
-        />
+      <EffectContainer>
+        <Form>
+          <FormInput
+            placeholder="Inclua aqui o problema que ocorreu na entrega."
+            autoCorrect={false}
+            multiline
+            value={problem}
+            onChangeText={setProblem}
+          />
 
-        <ErrorFeedback>{error}</ErrorFeedback>
-        <SubmitButton loading={loading} onPress={handleSubmit}>
-          Enviar
-        </SubmitButton>
-      </Form>
+          <ErrorFeedback>{error}</ErrorFeedback>
+          <SubmitButton loading={loading} onPress={handleSubmit}>
+            Enviar
+          </SubmitButton>
+        </Form>
+      </EffectContainer>
     </Container>
   );
 }
