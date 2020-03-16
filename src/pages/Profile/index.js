@@ -1,6 +1,7 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { format } from 'date-fns';
+import { Text } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { signOut } from '~/store/modules/auth/actions';
@@ -19,7 +20,6 @@ import {
 export default function Profile() {
   const dispatch = useDispatch();
   const profile = useSelector(state => state.user.profile);
-  const auth = useSelector(state => state.auth);
 
   function handleLogout() {
     dispatch(signOut());
@@ -29,7 +29,7 @@ export default function Profile() {
     <Container>
       <AvatarProfile>
         {profile.avatar ? (
-          <Avatar size={140} source={{ url: profile.avatar.url }} />
+          <Avatar size={140} source={{ uri: profile.avatar.url }} />
         ) : (
           <Text>{profile.name}</Text>
         )}

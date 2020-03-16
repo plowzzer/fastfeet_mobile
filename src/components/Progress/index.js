@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import {
   Container,
@@ -13,8 +13,8 @@ export default function Progress({ status }) {
     <Container>
       <ProgressContainer>
         <StatusDot active />
-        <StatusDot active={status === 'ENTREGUE' || status === 'RETIRADA'} />
-        <StatusDot active={status === 'ENTREGUE'} />
+        <StatusDot active={status === 'DELIVERED' || status === 'WITHDRAWN'} />
+        <StatusDot active={status === 'DELIVERED'} />
       </ProgressContainer>
       <ProgressName>
         <StatusName>Aguardando Retirada</StatusName>

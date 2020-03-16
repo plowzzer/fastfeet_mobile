@@ -5,19 +5,38 @@ import { TouchableOpacity, StyleSheet } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { useCamera } from 'react-native-camera-hooks';
 
-import { Container, Background, EffectContainer } from './styles';
+import api from '~/services/api';
+
+import { Container, Background, EffectContainer, SendButton } from './styles';
 
 export default function ConfirmDelivery({ initialProps }) {
-  const [
-    { cameraRef, type, isRecording },
-    { recordVideo, setIsRecording },
-  ] = useCamera(initialProps);
+  const [{ cameraRef, type, textRecognized }, { takePicture }] = useCamera(
+    initialProps
+  );
+  const dataFile = new FormData();
+
+  async function handleSend() {
+    const photo = await takePicture({ quality: 0.5 });
+    // console.log(photo);
+    dataFile.append('file', photo);
+    const response = await api.post('files', dataFile);
+    // console.log(dataFile);
+    console.log(response);
+
+    // console.log(response);
+  }
 
   return (
     <Container>
       <Background />
       <EffectContainer>
-        <RNCamera ref={cameraRef} type={type} style={styles.preview} />
+        <RNCamera
+          ref={cameraRef}
+          type={type}
+          onTextRecognized={textRecognized}
+          style={styles.preview}
+        />
+        <SendButton onPress={handleSend}>Enviar</SendButton>
       </EffectContainer>
     </Container>
   );

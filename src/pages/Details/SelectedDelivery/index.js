@@ -1,7 +1,11 @@
 import React from 'react';
 import { format } from 'date-fns';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, Alert } from 'react-native';
+import { useSelector } from 'react-redux';
+
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import api from '~/services/api';
 
 import {
   Container,
@@ -21,6 +25,67 @@ import {
 
 export default function SelectedDelivery({ navigation }) {
   const data = navigation.getParam('data');
+  const profile = useSelector(state => state.user.profile);
+
+  async function handleWithdrawn() {
+    const packageId = data.id;
+    const profileId = profile.id;
+
+    try {
+      await api.post(`deliveryman/${profileId}/deliveries/${packageId}`);
+    } catch (error) {
+      Alert.alert('Alguma coisa aconteceu', `${error.response.data.error}`, [
+        { text: 'Ok' },
+      ]);
+    }
+  }
+
+  function renderOptions(status) {
+    switch (status) {
+      case 'AWAITING':
+        return (
+          <OptionsContainer>
+            <Option onPress={handleWithdrawn}>
+              <Icon name="local-shipping" size={24} color="#82BF18" />
+              <OptionText>Retirar encomenda</OptionText>
+            </Option>
+          </OptionsContainer>
+        );
+
+      case 'WITHDRAWN':
+        return (
+          <OptionsContainer>
+            <Option
+              onPress={() => {
+                navigation.navigate('InformProblem', { data });
+              }}
+            >
+              <Icon name="highlight-off" size={24} color="#E74040" />
+              <OptionText>Informar Problema</OptionText>
+            </Option>
+            <Option
+              onPress={() => {
+                navigation.navigate('CheckProblems', { data });
+              }}
+            >
+              <Icon name="info-outline" size={24} color="#E7BA40" />
+              <OptionText>Visualizar Problemas</OptionText>
+            </Option>
+            <Option
+              onPress={() => {
+                navigation.navigate('ConfirmDelivery', { data });
+              }}
+            >
+              <Icon name="alarm-on" size={24} color="#7D40E7" />
+              <OptionText>Confirmar Entrega</OptionText>
+            </Option>
+          </OptionsContainer>
+        );
+
+      default:
+      // Do nothing
+    }
+  }
 
   return (
     <Container>
@@ -41,7 +106,7 @@ export default function SelectedDelivery({ navigation }) {
               {data.recipient.street}, {data.recipient.number}
               {data.recipient.complement &&
                 ` - ${data.recipient.complement} `}{' '}
-              |{data.recipient.city} - {data.recipient.state},{' '}
+              | {data.recipient.city} - {data.recipient.state},{' '}
               {data.recipient.cep}
             </DetailText>
           </DetailContainer>
@@ -79,32 +144,7 @@ export default function SelectedDelivery({ navigation }) {
             </DetailContainer>
           </RowDetail>
         </CardContainer>
-        <OptionsContainer>
-          <Option
-            onPress={() => {
-              navigation.navigate('InformProblem', { data });
-            }}
-          >
-            <Icon name="highlight-off" size={24} color="#E74040" />
-            <OptionText>Informar Problema</OptionText>
-          </Option>
-          <Option
-            onPress={() => {
-              navigation.navigate('CheckProblems', { data });
-            }}
-          >
-            <Icon name="info-outline" size={24} color="#E7BA40" />
-            <OptionText>Visualizar Problemas</OptionText>
-          </Option>
-          <Option
-            onPress={() => {
-              navigation.navigate('ConfirmDelivery', { data });
-            }}
-          >
-            <Icon name="alarm-on" size={24} color="#7D40E7" />
-            <OptionText>Confirmar Entrega</OptionText>
-          </Option>
-        </OptionsContainer>
+        {renderOptions(data.status)}
       </EffectContainer>
     </Container>
   );
